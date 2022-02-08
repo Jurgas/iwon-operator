@@ -1,0 +1,21 @@
+@import "src/variables";
+
+.header {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(black, 0.1);
+  background-color: $primary;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2),
+  0 6px 10px 0 rgba(0, 0, 0, .14),
+  0 1px 18px 0 rgba(0, 0, 0, .12);
+
+  .logo {
+    color: $text-white;
+    font-size: 24px;
+    padding: 10px;
+    cursor: pointer;
+    text-decoration: initial;
+  }
+}

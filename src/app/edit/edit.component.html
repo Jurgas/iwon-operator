@@ -1,0 +1,108 @@
+<div class="main-container">
+  <button class="back-button"
+          mat-button
+          routerLink="/home"
+          type="button">
+    <mat-icon>arrow_back</mat-icon>
+    Wstecz
+  </button>
+  <div class="facilities-list">
+    <div class="title">Lista instytucji</div>
+    <div class="facilities-wrapper">
+      <div class="facility"
+           *ngFor="let facility of facilities; index as i"
+           [ngClass]="{'active': i === selectedFacility}"
+           (click)="selectFacility(i)">
+        {{facility}}
+      </div>
+    </div>
+  </div>
+  <div class="details-view">
+    <form class="facility-form"
+          [formGroup]="facilityForm"
+          (ngSubmit)="onSubmit()">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{facilityForm.get('name')?.value || 'Nowa instytucja'}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="double-input-line">
+            <mat-form-field>
+              <mat-label>Województwo</mat-label>
+              <input matInput
+                     formControlName="voivodeship"
+                     autocomplete="off"
+                     type="text">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Powiat</mat-label>
+              <input matInput
+                     formControlName="district"
+                     autocomplete="off"
+                     type="text">
+            </mat-form-field>
+          </div>
+          <div class="single-input-line">
+            <mat-form-field>
+              <mat-label>Nazwa</mat-label>
+              <input matInput
+                     formControlName="name"
+                     autocomplete="off"
+                     type="text">
+            </mat-form-field>
+          </div>
+          <div class="single-input-line">
+            <mat-form-field>
+              <mat-label>Kategoria</mat-label>
+              <mat-select formControlName="category">
+                <mat-option *ngFor="let category of CategoryEnum | keyvalue : noOrder"
+                            [value]="category.key">
+                  {{category.value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="single-input-line">
+            <mat-form-field>
+              <mat-label>Adres</mat-label>
+              <input matInput
+                     formControlName="address"
+                     autocomplete="off"
+                     type="text">
+            </mat-form-field>
+          </div>
+          <div class="double-input-line">
+            <mat-form-field>
+              <mat-label>Numer telefonu</mat-label>
+              <input matInput
+                     formControlName="phone"
+                     autocomplete="off"
+                     type="text">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>E-mail</mat-label>
+              <input matInput
+                     formControlName="email"
+                     autocomplete="off"
+                     type="text">
+            </mat-form-field>
+          </div>
+          <div class="single-input-line">
+            <mat-form-field>
+              <mat-label>Link strony</mat-label>
+              <input matInput
+                     formControlName="website"
+                     autocomplete="off"
+                     type="text">
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <button class="save-button"
+              mat-raised-button
+              color="accent"
+              type="submit">Zapisz
+      </button>
+    </form>
+  </div>
+</div>

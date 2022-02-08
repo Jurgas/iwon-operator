@@ -1,0 +1,14 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+$iwon-primary: mat.define-palette(mat.$deep-purple-palette);
+$iwon-accent: mat.define-palette(mat.$amber-palette);
+$iwon-warn: mat.define-palette(mat.$red-palette);
+$iwon-theme: mat.define-light-theme((
+  color: (
+    primary: $iwon-primary,
+    accent: $iwon-accent,
+    warn: $iwon-warn,
+  )
+));
+@include mat.all-component-themes($iwon-theme);

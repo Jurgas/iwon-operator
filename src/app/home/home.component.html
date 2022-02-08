@@ -1,0 +1,71 @@
+<div class="main-container">
+  <div class="upload-part">
+    <div class="website">
+      <div class="title">Pobierz dane ze strony</div>
+      <form class="website-form" [formGroup]="searchWebsiteForm" (ngSubmit)="onWebsiteSubmit()">
+        <mat-form-field>
+          <mat-label>Link strony</mat-label>
+          <input matInput
+                 formControlName="website"
+                 autocomplete="off"
+                 type="text"
+                 required="false">
+          <mat-error *ngIf="searchWebsiteForm.get('website')?.hasError('required')">
+            Pole nie może być puste!
+          </mat-error>
+        </mat-form-field>
+        <mat-slide-toggle color="primary"
+                          formControlName="crawlWebsite">Przeszukaj stronę
+        </mat-slide-toggle>
+        <div class="button-row">
+          <button class="action-button"
+                  mat-raised-button
+                  color="accent"
+                  type="submit"
+                  [disabled]="!searchWebsiteForm.valid">Dalej
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="divider vertical"></div>
+    <div class="file">
+      <div class="file-wrapper">
+        <div class="title">Pobierz dane z pliku</div>
+        <mat-form-field (click)="fileInput.click()">
+          <mat-label *ngIf="!!selectedFile; else newFile">{{selectedFile.name}}</mat-label>
+          <ng-template #newFile>
+            <mat-label>Wybierz plik</mat-label>
+          </ng-template>
+          <input matInput disabled>
+          <button mat-icon-button matSuffix>
+            <mat-icon>attach_file</mat-icon>
+          </button>
+          <input hidden (change)="selectFile($event)" #fileInput type="file">
+        </mat-form-field>
+      </div>
+      <div class="button-row">
+        <button class="action-button"
+                mat-raised-button
+                color="accent"
+                type="button"
+                [disabled]="!selectedFile"
+                (click)="fileSubmit()">Dalej
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="manual-part">
+    <button class="manual-button"
+            mat-raised-button
+            color="accent"
+            type="button"
+            (click)="goToCollect()">Wprowadź dane ręcznie
+    </button>
+    <button class="manual-button"
+            mat-raised-button
+            color="accent"
+            type="button"
+            (click)="goToEdit()">Edytuj dane
+    </button>
+  </div>
+</div>

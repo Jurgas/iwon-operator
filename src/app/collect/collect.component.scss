@@ -1,0 +1,84 @@
+@import 'src/variables';
+
+.main-container {
+  padding: max(10vh, 80px) 12vw;
+  min-height: calc(100vh - 61px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .back-button {
+    position: absolute;
+    top: max(calc(5vh - 20px), 20px);
+    left: 12vw;
+    height: 40px;
+    width: 100px;
+  }
+
+  .form-container {
+    display: flex;
+    width: 100%;
+    min-height: 100%;
+  }
+}
+
+.collect-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px 0;
+
+  mat-card {
+    padding: 30px;
+    width: 660px;
+
+    mat-card-header {
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      color: $text-dark;
+
+      mat-card-title {
+        margin: 0;
+        line-height: 40px;
+      }
+    }
+
+    mat-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: max(1vh, 10px) 0;
+
+      .double-input-line {
+        display: flex;
+        justify-content: space-between;
+        width: 600px;
+
+        mat-form-field {
+          width: 275px;
+        }
+      }
+
+      .single-input-line mat-form-field {
+        width: 600px;
+      }
+    }
+  }
+
+  .add-facility-button {
+    width: 660px;
+    height: 100px;
+  }
+
+  .button-row {
+    width: 660px;
+    display: flex;
+    justify-content: flex-end;
+
+    .submit-button {
+      height: 40px;
+      width: 200px;
+    }
+  }
+}

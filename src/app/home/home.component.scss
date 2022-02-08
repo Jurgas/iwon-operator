@@ -1,0 +1,110 @@
+@import 'src/variables';
+
+.main-container {
+  padding: max(10vh, 80px) 12vw;
+  min-height: calc(100vh - 61px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: max(40px, 4vh) 0;
+}
+
+.divider.vertical {
+  border-right: 1px dashed rgba($text-dark, 0.3);
+  width: 1px;
+  min-height: 100%;
+}
+
+.divider.horizontal {
+  border-bottom: 1px dashed rgba($text-dark, 0.3);
+  height: 1px;
+  width: 100%;
+}
+
+.upload-part {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0 40px;
+}
+
+.title {
+  font-size: 24px;
+  color: $text-dark;
+}
+
+.action-button {
+  height: 40px;
+  width: 100px;
+}
+
+.website {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: max(20px, 2vh) 0;
+  padding: 20px 0;
+
+  .website-form {
+    display: flex;
+    flex-direction: column;
+    color: $text-dark;
+    width: 100%;
+    gap: 20px 0;
+
+    mat-form-field {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    mat-slide-toggle {
+      padding-bottom: 20px;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .button-row {
+      align-self: flex-end;
+    }
+  }
+}
+
+.file {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 0;
+
+  .file-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: max(20px, 2vh) 0;
+    width: 100%;
+    color: $text-dark;
+
+    mat-form-field {
+      max-width: 600px;
+      width: 100%;
+    }
+  }
+
+  .button-row {
+    align-self: flex-end;
+  }
+}
+
+.manual-part {
+  display: flex;
+  justify-content: center;
+  gap: 0 50px;
+  padding-top: max(40px, 4vh);
+  border-top: 1px dashed rgba($text-dark, 0.3);
+
+  .manual-button {
+    height: 40px;
+    width: 200px;
+  }
+}

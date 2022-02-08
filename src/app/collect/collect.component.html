@@ -1,0 +1,108 @@
+<div class="main-container">
+  <button class="back-button"
+          mat-button
+          routerLink="/home"
+          type="button">
+    <mat-icon>arrow_back</mat-icon>
+    Wstecz
+  </button>
+  <form class="collect-form" [formGroup]="collectForm" (ngSubmit)="onSubmit()">
+    <ng-container formArrayName="facilities"
+                  *ngFor="let facility of facilitiesFormArray.controls; index as i">
+      <mat-card [formGroupName]="i">
+        <mat-card-header>
+          <mat-card-title>{{facility.get('name')?.value || 'Nowa instytucja'}}</mat-card-title>
+          <button mat-icon-button
+                  type="button"
+                  (click)="removeFacility(i)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="double-input-line">
+            <mat-form-field>
+              <mat-label>Województwo</mat-label>
+              <input matInput
+                     formControlName="voivodeship"
+                     autocomplete="off"
+                     type="text">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Powiat</mat-label>
+              <input matInput
+                     formControlName="district"
+                     autocomplete="off"
+                     type="text">
+            </mat-form-field>
+          </div>
+          <div class="single-input-line">
+            <mat-form-field>
+              <mat-label>Nazwa</mat-label>
+              <input matInput
+                     formControlName="name"
+                     autocomplete="off"
+                     type="text">
+            </mat-form-field>
+          </div>
+          <div class="single-input-line">
+            <mat-form-field>
+              <mat-label>Kategoria</mat-label>
+              <mat-select formControlName="category">
+                <mat-option *ngFor="let category of CategoryEnum | keyvalue : noOrder"
+                            [value]="category.key">
+                  {{category.value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="single-input-line">
+            <mat-form-field>
+              <mat-label>Adres</mat-label>
+              <input matInput
+                     formControlName="address"
+                     autocomplete="off"
+                     type="text">
+            </mat-form-field>
+          </div>
+          <div class="double-input-line">
+            <mat-form-field>
+              <mat-label>Numer telefonu</mat-label>
+              <input matInput
+                     formControlName="phone"
+                     autocomplete="off"
+                     type="text">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>E-mail</mat-label>
+              <input matInput
+                     formControlName="email"
+                     autocomplete="off"
+                     type="text">
+            </mat-form-field>
+          </div>
+          <div class="single-input-line">
+            <mat-form-field>
+              <mat-label>Link strony</mat-label>
+              <input matInput
+                     formControlName="website"
+                     autocomplete="off"
+                     type="text">
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+    <button class="add-facility-button"
+            mat-raised-button
+            type="button"
+            (click)="addFacility()">Dodaj kolejną instytucję
+    </button>
+    <div class="button-row">
+      <button class="submit-button"
+              mat-raised-button
+              color="accent"
+              type="submit">Dodaj
+      </button>
+    </div>
+  </form>
+</div>

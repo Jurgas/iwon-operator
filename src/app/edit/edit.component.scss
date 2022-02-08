@@ -1,0 +1,107 @@
+@import 'src/variables';
+
+.main-container {
+  padding: max(10vh, 80px) 12vw;
+  height: calc(100vh - 61px);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  gap: 0 40px;
+
+  .back-button {
+    position: absolute;
+    top: max(calc(5vh - 20px), 20px);
+    left: 12vw;
+    height: 40px;
+    width: 100px;
+  }
+}
+
+.facilities-list {
+  width: 400px;
+  height: 100%;
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+  padding: 20px;
+
+  .title {
+    color: $text-dark;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba($text-dark, 0.3);
+  }
+
+  .facilities-wrapper {
+    height: calc(100% - 35px);
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px 0;
+
+    .facility {
+      cursor: pointer;
+
+      &.active {
+        font-weight: 600;
+        color: $primary;
+        cursor: default;
+      }
+    }
+  }
+}
+
+.details-view {
+  width: 660px;
+}
+
+.facility-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px 0;
+}
+
+mat-card {
+  padding: 30px;
+  width: 100%;
+
+  mat-card-header {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    color: $text-dark;
+
+    mat-card-title {
+      margin: 0;
+      line-height: 40px;
+    }
+  }
+
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: max(1vh, 10px) 0;
+
+    .double-input-line {
+      display: flex;
+      justify-content: space-between;
+      width: 600px;
+
+      mat-form-field {
+        width: 275px;
+      }
+    }
+
+    .single-input-line mat-form-field {
+      width: 600px;
+    }
+  }
+}
+
+.save-button {
+  align-self: flex-end;
+  height: 40px;
+  width: 100px;
+}

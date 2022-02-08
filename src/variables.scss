@@ -1,0 +1,13 @@
+@import "theme";
+
+$primary: map-get($iwon-primary, default);
+$primary-light: map-get($iwon-primary, lighter);
+$primary-dark: map-get($iwon-primary, darker);
+$accent: map-get($iwon-accent, default);
+$accent-light: map-get($iwon-accent, lighter);
+$accent-dark: map-get($iwon-accent, darker);
+
+$warning: map-get($iwon-warn, default);
+
+$text-white: #ffffff;
+$text-dark: #303030;
