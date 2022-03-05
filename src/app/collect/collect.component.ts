@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {finalize} from 'rxjs';
+import {finalize, of, switchMap} from 'rxjs';
 import {CategoryEnum} from '../_enums/category.enum';
 import {ScrapyConfig} from '../_interfaces/scrapy-config';
 import {ScrapyResponse} from '../_interfaces/scrapy-response';
@@ -29,21 +29,25 @@ export class CollectComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams
-      .subscribe(params => {
-        if (params['website']) {
-          const scrapyConfig: ScrapyConfig = {
-            spider_name: 'facilities',
-            request: {
-              url: params['website'],
-            },
-          };
-          this.spinnerService.show();
-          this.apiService.getScrapyData(scrapyConfig)
-            .pipe(finalize(() => this.spinnerService.hide()))
-            .subscribe((result: ScrapyResponse) => {
-              console.log(result);
-              console.log(result.items);
-            });
+      .pipe(
+        switchMap((params) => {
+          if (params['website']) {
+            const scrapyConfig: ScrapyConfig = {
+              spider_name: 'facilities',
+              request: {
+                url: params['website'],
+              },
+            };
+            this.spinnerService.show();
+            return this.apiService.getScrapyData(scrapyConfig)
+              .pipe(finalize(() => this.spinnerService.hide()));
+          }
+          return of(null);
+        }))
+      .subscribe((result: ScrapyResponse | null) => {
+        if (!!result) {
+          console.log(result);
+          console.log(result.items);
         }
       });
   }
