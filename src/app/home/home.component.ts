@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
   });
 
   selectedFile: File | undefined;
-  
 
   constructor(private router: Router) {
   }
@@ -33,7 +32,12 @@ export class HomeComponent implements OnInit {
 
   onWebsiteSubmit(): void {
     if (this.searchWebsiteForm.valid) {
-      this.goToCollect();
+      this.router.navigate(
+        ['/collect'],
+        {
+          queryParams:
+            {website: this.searchWebsiteForm.get('website')?.value},
+        });
     }
   }
 

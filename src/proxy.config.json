@@ -1,0 +1,10 @@
+{
+  "/scrapy": {
+    "target": "http://localhost:9080",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/scrapy": ""
+    }
+  }
+}

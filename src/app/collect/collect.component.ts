@@ -1,7 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CategoryEnum} from '../_enums/category.enum';
+import {ScrapyConfig} from '../_interfaces/scrapy-config';
+import {ScrapyResponse} from '../_interfaces/scrapy-response';
+import {ApiService} from '../_services/api.service';
+import {SpinnerService} from '../_services/spinner.service';
 
 @Component({
   selector: 'app-collect',
@@ -16,10 +20,30 @@ export class CollectComponent implements OnInit {
 
   CategoryEnum = CategoryEnum;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private apiService: ApiService,
+              private spinnerService: SpinnerService) {
   }
 
   ngOnInit(): void {
+    this.route.queryParams
+      .subscribe(params => {
+        if (params['website']) {
+          const scrapyConfig: ScrapyConfig = {
+            spider_name: 'facilities',
+            request: {
+              url: params['website'],
+            },
+          };
+          this.spinnerService.show();
+          this.apiService.getScrapyData(scrapyConfig).subscribe((result: ScrapyResponse) => {
+            this.spinnerService.hide();
+            console.log(result);
+            console.log(result.items);
+          });
+        }
+      });
   }
 
   get facilitiesFormArray(): FormArray {

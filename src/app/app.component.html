@@ -4,3 +4,6 @@
 <div class="content">
   <router-outlet></router-outlet>
 </div>
+<div class="spinner" *ngIf="isSpinner$ | async">
+  <mat-spinner></mat-spinner>
+</div>
