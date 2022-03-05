@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
+import {finalize} from 'rxjs';
 import {CategoryEnum} from '../_enums/category.enum';
 import {ScrapyConfig} from '../_interfaces/scrapy-config';
 import {ScrapyResponse} from '../_interfaces/scrapy-response';
@@ -37,11 +38,12 @@ export class CollectComponent implements OnInit {
             },
           };
           this.spinnerService.show();
-          this.apiService.getScrapyData(scrapyConfig).subscribe((result: ScrapyResponse) => {
-            this.spinnerService.hide();
-            console.log(result);
-            console.log(result.items);
-          });
+          this.apiService.getScrapyData(scrapyConfig)
+            .pipe(finalize(() => this.spinnerService.hide()))
+            .subscribe((result: ScrapyResponse) => {
+              console.log(result);
+              console.log(result.items);
+            });
         }
       });
   }
