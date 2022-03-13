@@ -1,7 +1,9 @@
+import {ScrapyFacilityItem} from './scrapy-facility-item';
+
 export interface ScrapyResponse {
   status: string,
-  items: any[],
-  items_dropped: any[],
+  items: ScrapyFacilityItem[],
+  items_dropped: ScrapyFacilityItem[],
   stats: ScrapyStats,
   spider_name: string
 }

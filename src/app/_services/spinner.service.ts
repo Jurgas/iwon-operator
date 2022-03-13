@@ -20,6 +20,6 @@ export class SpinnerService {
   }
 
   hide(): void {
-    setTimeout(() => this.isSpinner$.next(false));
+    setTimeout(() => this.isSpinner$.next(false), 200);
   }
 }

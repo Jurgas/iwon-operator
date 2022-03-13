@@ -8,22 +8,29 @@
   </button>
   <div class="facilities-list">
     <div class="title">Lista instytucji</div>
+    <div class="sort-options">
+      <mat-checkbox [formControl]="dateSort">Sortowanie po dacie</mat-checkbox>
+    </div>
     <div class="facilities-wrapper">
-      <div class="facility"
-           *ngFor="let facility of facilities; index as i"
-           [ngClass]="{'active': i === selectedFacility}"
-           (click)="selectFacility(i)">
-        {{facility}}
-      </div>
+      <ng-container *ngFor="let facility of facilities; index as i">
+        <div class="facility">
+          <div class="facility-name"
+               [ngClass]="{'active': facility?.id === selectedId}"
+               (click)="selectFacility(facility.id, facility)">{{facility.name}}</div>
+          <span class="facility-date">zmieniono: {{facility.updatedAt | date : "HH:mm dd.MM.yy"}}</span>
+          <div class="divider" *ngIf="i !== facilities.length - 1"></div>
+        </div>
+      </ng-container>
     </div>
   </div>
   <div class="details-view">
     <form class="facility-form"
+          *ngIf="facilities.length > 0"
           [formGroup]="facilityForm"
           (ngSubmit)="onSubmit()">
       <mat-card>
         <mat-card-header>
-          <mat-card-title>{{facilityForm.get('name')?.value || 'Nowa instytucja'}}</mat-card-title>
+          <mat-card-title>{{facilityForm.get('name')?.value?.trim().length > 0 ? facilityForm.get('name')?.value : 'Nowa instytucja'}}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <div class="double-input-line">
@@ -98,11 +105,19 @@
           </div>
         </mat-card-content>
       </mat-card>
-      <button class="save-button"
-              mat-raised-button
-              color="accent"
-              type="submit">Zapisz
-      </button>
+      <div class="button-row">
+        <button mat-stroked-button
+                color="warn"
+                type="button"
+                [disabled]="!facilityForm.valid"
+                (click)="deleteFacility()">Usuń
+        </button>
+        <button mat-raised-button
+                color="accent"
+                type="submit"
+                [disabled]="!facilityForm.valid">Zapisz
+        </button>
+      </div>
     </form>
   </div>
 </div>

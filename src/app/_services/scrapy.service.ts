@@ -8,7 +8,7 @@ import {ScrapyResponse} from '../_interfaces/scrapy-response';
 @Injectable({
   providedIn: 'root',
 })
-export class ApiService {
+export class ScrapyService {
 
   constructor(private http: HttpClient) {
   }

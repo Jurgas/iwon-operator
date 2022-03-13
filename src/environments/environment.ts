@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   scrapyUrl: 'http://localhost:4200/scrapy/',
+  apiUrl: 'http://localhost:8080/',
 };
 
 /*

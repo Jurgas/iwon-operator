@@ -5,8 +5,9 @@ import {finalize, of, switchMap} from 'rxjs';
 import {CategoryEnum} from '../_enums/category.enum';
 import {ScrapyConfig} from '../_interfaces/scrapy-config';
 import {ScrapyResponse} from '../_interfaces/scrapy-response';
-import {ApiService} from '../_services/api.service';
+import {ScrapyService} from '../_services/scrapy.service';
 import {SpinnerService} from '../_services/spinner.service';
+import {CustomValidators} from '../_validators/custom.validators';
 
 @Component({
   selector: 'app-collect',
@@ -23,7 +24,7 @@ export class CollectComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private apiService: ApiService,
+              private apiService: ScrapyService,
               private spinnerService: SpinnerService) {
   }
 
@@ -58,10 +59,10 @@ export class CollectComponent implements OnInit {
 
   public addFacility(): void {
     const facility: FormGroup = new FormGroup({
-      voivodeship: new FormControl(null),
-      district: new FormControl(null),
-      name: new FormControl(null),
-      category: new FormControl(null),
+      voivodeship: new FormControl(null, [Validators.required, CustomValidators.noWhitespaceValidator]),
+      district: new FormControl(null, [Validators.required, CustomValidators.noWhitespaceValidator]),
+      name: new FormControl(null, [Validators.required, CustomValidators.noWhitespaceValidator]),
+      category: new FormControl(null, [Validators.required]),
       address: new FormControl(null),
       phone: new FormControl(null),
       email: new FormControl(null),
