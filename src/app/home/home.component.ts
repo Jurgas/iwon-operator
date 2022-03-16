@@ -32,11 +32,15 @@ export class HomeComponent implements OnInit {
 
   onWebsiteSubmit(): void {
     if (this.searchWebsiteForm.valid) {
+      let website = this.searchWebsiteForm.get('website')?.value;
+      if (!website.startsWith('https://') && !website.startsWith('http://')) {
+        website = 'http://' + website;
+      }
       this.router.navigate(
         ['/collect'],
         {
           queryParams:
-            {website: this.searchWebsiteForm.get('website')?.value},
+            {website: website},
         });
     }
   }

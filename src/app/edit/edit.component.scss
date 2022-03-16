@@ -49,27 +49,36 @@
     .facility {
       display: flex;
       flex-direction: column;
+      cursor: pointer;
 
       &:last-child {
         margin-bottom: 10px;
       }
-    }
-
-    .facility-name {
-      cursor: pointer;
 
       &.active {
-        font-weight: 500;
-        color: $primary;
         cursor: default;
+
+        .facility-name {
+          font-weight: 500;
+          color: $primary;
+        }
       }
     }
+
+    //.facility-name {
+    //  cursor: pointer;
+    //
+    //  &.active {
+    //    font-weight: 500;
+    //    color: $primary;
+    //    cursor: default;
+    //  }
+    //}
 
     .facility-date {
       color: rgba($text-dark, .75);
       align-self: flex-end;
       font-size: 12px;
-      cursor: default;
     }
 
     .divider {

@@ -5,6 +5,7 @@ import {finalize, of, switchMap} from 'rxjs';
 import {CategoryEnum} from '../_enums/category.enum';
 import {ScrapyConfig} from '../_interfaces/scrapy-config';
 import {ScrapyResponse} from '../_interfaces/scrapy-response';
+import {FacilityService} from '../_services/facility.service';
 import {ScrapyService} from '../_services/scrapy.service';
 import {SpinnerService} from '../_services/spinner.service';
 import {CustomValidators} from '../_validators/custom.validators';
@@ -17,7 +18,7 @@ import {CustomValidators} from '../_validators/custom.validators';
 export class CollectComponent implements OnInit {
 
   collectForm: FormGroup = new FormGroup({
-    facilities: new FormArray([], Validators.minLength(1)),
+    facilities: new FormArray([], Validators.required),
   });
 
   CategoryEnum = CategoryEnum;
@@ -25,7 +26,8 @@ export class CollectComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private apiService: ScrapyService,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private facilityService: FacilityService) {
   }
 
   ngOnInit(): void {
@@ -68,9 +70,7 @@ export class CollectComponent implements OnInit {
       email: new FormControl(null),
       website: new FormControl(null),
     });
-    setTimeout(() => {
-      this.facilitiesFormArray.push(facility);
-    }, 100);
+    this.facilitiesFormArray.push(facility);
   }
 
   public removeFacility(index: number): void {
@@ -79,7 +79,9 @@ export class CollectComponent implements OnInit {
 
   onSubmit(): void {
     if (this.collectForm.valid) {
-      this.router.navigate(['/home']);
+      this.facilityService.addFacilities(this.collectForm.getRawValue().facilities).subscribe(() => {
+        this.router.navigate(['/home']);
+      });
     }
   }
 

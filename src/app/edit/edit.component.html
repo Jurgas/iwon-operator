@@ -13,10 +13,10 @@
     </div>
     <div class="facilities-wrapper">
       <ng-container *ngFor="let facility of facilities; index as i">
-        <div class="facility">
-          <div class="facility-name"
-               [ngClass]="{'active': facility?.id === selectedId}"
-               (click)="selectFacility(facility.id, facility)">{{facility.name}}</div>
+        <div class="facility"
+             [ngClass]="{'active': facility?.id === selectedId}"
+             (click)="selectFacility(facility.id, facility)">
+          <div class="facility-name">{{facility.name}}</div>
           <span class="facility-date">zmieniono: {{facility.updatedAt | date : "HH:mm dd.MM.yy"}}</span>
           <div class="divider" *ngIf="i !== facilities.length - 1"></div>
         </div>
