@@ -1,8 +1,8 @@
 <div class="main-container">
-  <div class="upload-part">
+  <form class="upload-part" [formGroup]="searchWebsiteForm" (ngSubmit)="onSubmit()">
     <div class="website">
       <div class="title">Pobierz dane ze strony</div>
-      <form class="website-form" [formGroup]="searchWebsiteForm" (ngSubmit)="onWebsiteSubmit()">
+      <div class="website-field">
         <mat-form-field>
           <mat-label>Link strony</mat-label>
           <input matInput
@@ -22,38 +22,37 @@
                   mat-raised-button
                   color="accent"
                   type="submit"
-                  [disabled]="!searchWebsiteForm.valid">Dalej
+                  [disabled]="!searchWebsiteForm.get('website')?.valid">Dalej
           </button>
         </div>
-      </form>
+      </div>
     </div>
     <div class="divider vertical"></div>
     <div class="file">
       <div class="file-wrapper">
         <div class="title">Pobierz dane z pliku</div>
-        <mat-form-field (click)="fileInput.click()">
-          <mat-label *ngIf="!!selectedFile; else newFile">{{selectedFile.name}}</mat-label>
-          <ng-template #newFile>
-            <mat-label>Wybierz plik</mat-label>
-          </ng-template>
-          <input matInput disabled>
-          <button mat-icon-button matSuffix>
-            <mat-icon>attach_file</mat-icon>
-          </button>
-          <input hidden (change)="selectFile($event)" #fileInput type="file">
+        <mat-form-field>
+          <mat-label>Link pliku pdf</mat-label>
+          <input matInput
+                 formControlName="file"
+                 autocomplete="off"
+                 type="text"
+                 required="false">
+          <mat-error *ngIf="searchWebsiteForm.get('file')?.hasError('required')">
+            Pole nie może być puste!
+          </mat-error>
         </mat-form-field>
       </div>
       <div class="button-row">
         <button class="action-button"
                 mat-raised-button
                 color="accent"
-                type="button"
-                [disabled]="!selectedFile"
-                (click)="fileSubmit()">Dalej
+                type="submit"
+                [disabled]="!searchWebsiteForm.get('file')?.valid">Dalej
         </button>
       </div>
     </div>
-  </div>
+  </form>
   <div class="manual-part">
     <button class="manual-button"
             mat-raised-button

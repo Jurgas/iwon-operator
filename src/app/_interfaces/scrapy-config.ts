@@ -1,6 +1,10 @@
 export interface ScrapyConfig {
   request: ScrapyRequest,
-  spider_name: string
+  spider_name: string,
+  crawl_args: {
+    follow_links: boolean,
+    file: boolean
+  }
 }
 
 interface ScrapyRequest {
