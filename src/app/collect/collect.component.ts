@@ -51,7 +51,7 @@ export class CollectComponent implements OnInit, OnDestroy {
               },
               crawl_args: {
                 follow_links: params['follow_links'] === 'y',
-                file: params['follow_links'] === 'y',
+                file: params['file'] === 'y',
               },
             };
             this.spinnerService.show();
